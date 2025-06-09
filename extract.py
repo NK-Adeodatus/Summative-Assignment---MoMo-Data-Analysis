@@ -67,7 +67,7 @@ for sms in root.findall('sms'):
     amount = re.search(r'\d{1,3}(?:,\d{3})*|\d+\s*RWF\s', message)
     type_of_sms = determine_type_of_sms(message)
     sender = re.search(r'RWF\sfrom\s[a-zA-Z]*\s[a-zA-Z]*', message)
-    receiver = re.search(r'((RWF|transferred)\sto\s[a-zA-Z ]+\s[a-zA-Z ]+\s)', message)
+    receiver = re.search(r'(RWF|transferred)\sto\s([a-zA-Z ]+\s[a-zA-Z ]+)\s\d+', message)
     new_balance = re.search(r'(?i)new\sbalance\s?:(\s?\d{1,3}(?:,\d{3})*|\d+)', message)
     time = re.search(r'\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}', message)
 
@@ -77,35 +77,18 @@ for sms in root.findall('sms'):
 
         new_balance_match = re.search(r'(?i)new\s+balance\s*:\s*(\d[\d,]*)', message)
         new_balance = int(new_balance_match.group(1).replace(',', '')) if new_balance_match else None
-        # if new_balance_match:
-            # new_balance = int(new_balance.group().replace('new balance:', '').replace(',', '').strip())
-            # new_balance = int(re.sub(r'new\s+balance\s*:', '', new_balance.group(), flags=re.IGNORECASE).replace(',', '').strip())
-            
-
-
         if id:
             id = int(id.group().strip())
         sender = sender.group().replace('RWF from ', '').strip() if sender else None
-        receiver = receiver.group().replace(' to ', '').replace('RWF', '').replace('transferred', '').strip() if receiver else None
+        receiver = receiver.group(2).strip() if receiver else None
         time = time.group().strip() if time else None
-
-    # print('message:\n', message)
-    # print('id:\n', id)
-    # print('amount:\n', amount)
     if test <= 10:
         print('type_of_sms:\n', type_of_sms)
-    # print('sender:\n', sender)
-    # print('receiver:\n', receiver)
-    # print('new_balance:\n', new_balance)
-    # print('time:\n', time)
-
-
 
     # Insert the data into the database
     cursor.execute('''
         INSERT INTO sms (type_of_sms, amount, sender, receiver, message, new_balance, time)
         VALUES (?, ?, ?, ?, ?, ?, ?)
         ''', (type_of_sms, amount, sender, receiver, message, new_balance, time))
-print(test)
 
 conn.commit()
