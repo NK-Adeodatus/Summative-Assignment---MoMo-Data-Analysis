@@ -4,37 +4,26 @@ import re
 import os
 
 def determine_type_of_sms(message):
-    print('message:\n',message)
     if re.search(r'You have received', message):
-        # print('*1*')
         return 'Incoming Money'
     elif re.search(r'Your payment of', message):
         print('type: Your payment of')
-        # print('*2*')
         return 'Payments to Code Holders'
     elif re.search(r'A bank deposit of', message):
-        # print('*3*')
         return 'Bank Deposits'
     elif re.search(r'transferred to', message):
-        # print('*4*')
         return 'Bank Transfers'
     elif re.search(r'to Airtime', message):
-        # print('*5*')
         return 'Airtime Bill Payments'
     elif re.search(r'^<#>', message):
-        # print('*6*')
         return 'MoMo Advice'
     elif re.search(r'Cash Power', message):
-        # print('*7*')
         return 'Cash Power Bill Payments'
     elif re.search(r'withdrawn', message):
-        # print('*8*')
         return 'Withdrawals from Agents'
     elif re.search('Bundles', message):
-        # print('*9*')
         return 'Internet and Voice Bundle Purchases'
     else:
-        # print('*0*')
         return 'Uncategorized'
 
 def extract_sms():
@@ -49,7 +38,7 @@ def extract_sms():
     root = tree.getroot()
 
     # Connect to the SQLite database (or create it if it doesn't exist)
-    conn = sqlite3.connect('MoMo_SMS.db')
+    conn = sqlite3.connect(db_file)
     cursor = conn.cursor()
 
     cursor.execute('''
@@ -87,9 +76,6 @@ def extract_sms():
             sender = sender.group().replace('RWF from ', '').strip() if sender else None
             receiver = receiver.group(2).strip() if receiver else None
             time = time.group().strip() if time else None
-        # if test <= 10:
-        #     print('type_of_sms:\n', type_of_sms)
-
         # Insert the data into the database
         cursor.execute('''
             INSERT INTO sms (type_of_sms, amount, sender, receiver, message, new_balance, time)
@@ -98,4 +84,3 @@ def extract_sms():
 
     conn.commit()
     conn.close()
-extract_sms()

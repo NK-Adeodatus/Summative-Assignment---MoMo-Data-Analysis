@@ -1,34 +1,38 @@
 from flask import Flask, jsonify
 import sqlite3
 from extract import extract_sms
+import os
 
 app = Flask(__name__)
 
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_PATH = os.path.join(SCRIPT_DIR, 'MoMo_SMS.db')
+
 # Check if the data has already been extracted from the XML file to the dadabase
-def check_extraction():
-    conn = sqlite3.connect('MoMo_SMS.db')
-    cursor = conn.cursor()
-    cursor.execute('SELECT COUNT(*) FROM sms')
-    count = cursor.fetchone()[0]
-    conn.close()
-    if count == 0:
-        extract_sms()
+# def check_extraction():
+#     print('check run')
+#     if not os.path.exists(DB_PATH):
+#         print('check run in if')
+#         extract_sms()
+#         return
+#     try:
+#         print('check run in try')
+#         conn = sqlite3.connect(DB_PATH)
+#         cursor = conn.cursor()
+#         cursor.execute('SELECT COUNT(*) FROM sms')
+#         count = cursor.fetchone()[0]
+#         conn.close()
+#         if count == 0:
+#             extract_sms()
+#     except sqlite3.Error as e:
+#         print("SQLite error:", e)
+#         extract_sms()
 
-def test():
-    conn = sqlite3.connect('MoMo_SMS.db')
-    cursor = conn.cursor()
-
-    cursor.execute('SELECT type_of_sms, amount, sender, receiver, message, new_balance, time FROM sms LIMIT 1')
-    rows = cursor.fetchall()
-    print(rows)
-    conn.close()
-
-test()
 
 # Get the sms data from the database
 def get_all_sms():
-    check_extraction()
-    conn = sqlite3.connect('MoMo_SMS.db')
+    # check_extraction()
+    conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
     cursor.execute('SELECT type_of_sms, amount, sender, receiver, message, new_balance, time FROM sms LIMIT 1')
@@ -53,6 +57,6 @@ def get_all_sms():
 def api_sms():
     return jsonify(get_all_sms())
 
-if __name__ == '__main__':
+def run_app():
     app.run(debug=True)
 
