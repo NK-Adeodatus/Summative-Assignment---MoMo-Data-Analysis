@@ -3,7 +3,9 @@ import sqlite3
 from extract import extract_sms
 import os
 
+
 app = Flask(__name__)
+
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(SCRIPT_DIR, 'MoMo_SMS.db')
