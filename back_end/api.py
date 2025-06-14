@@ -1,14 +1,17 @@
-from flask import Flask, jsonify, make_response 
+from flask import Flask, jsonify, make_response, send_from_directory
 import sqlite3
 from extract import extract_sms
 import os
 
 
-app = Flask(__name__)
 
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(SCRIPT_DIR, 'MoMo_SMS.db')
+FRONTEND_DIR = os.path.join(SCRIPT_DIR, '../front_end')
+FRONTEND_DIR = os.path.abspath(FRONTEND_DIR)
+
+app = Flask(__name__, static_folder=FRONTEND_DIR, static_url_path='')
 
 # Get the sms data from the database
 def get_all_sms():
@@ -31,6 +34,10 @@ def get_all_sms():
         } for row in rows
     ]
     return sms_list
+
+@app.route('/')
+def serve_page():
+    return send_from_directory(app.static_folder, 'index.html')
 
 # serve the data from database in json format.
 @app.route('/api/sms', methods=['GET'])
