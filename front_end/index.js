@@ -18,7 +18,13 @@ function fetchMessages() {
 
 function renderMessages(messages) {
     const container = document.getElementById('sms-container')
+    const summaryContainer = document.getElementById('summary')
     container.innerHTML = ''
+    if (messages.length === allMessages.length) {
+        summary.textContent = `Showing all ${allMessages.length} SMS messages — no filter applied`;;
+    } else {
+        summary.textContent = `Showing ${messages.length} SMS messages matching your filters out of ${allMessages.length} total`;
+    }
         messages.forEach(sms => {
             const card = document.createElement('div')
             card.classList.add('sms-card')

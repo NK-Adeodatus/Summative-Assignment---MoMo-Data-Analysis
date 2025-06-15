@@ -18,7 +18,7 @@ def get_all_sms():
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
-    cursor.execute('SELECT type_of_sms, amount, sender, receiver, message, new_balance, time FROM sms LIMIT 25')
+    cursor.execute('SELECT type_of_sms, amount, sender, receiver, message, new_balance, time FROM sms')
     rows = cursor.fetchall()
     conn.close()
 

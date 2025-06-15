@@ -149,6 +149,12 @@ nav {
     cursor: pointer;
 }
 
+#summary {
+    font-weight: bold;
+    font-size: small;
+    margin-left: 10px;
+}
+
 @media (max-width: 1025px) {
     .info-container {
         display: flex;
