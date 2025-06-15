@@ -9,8 +9,31 @@
 <body>
     <nav>
         <div id="logo">MTN</div> 
-        <P>MoMo SMS Analyzer</P>
+        <div id="search-container">
+            <input type="text" id="search-input" placeholder="Type an SMS...">
+            <button id="search-btn">Search</button>
+        </div>
+        <p>MoMo SMS Analyzer</p>
     </nav>
+    <div id="filters-container">
+        <select id="type-filter">
+            <option value="">All Types</option>
+            <option value="Incoming Money">Incoming Money</option>
+            <option value="Bank Deposits">Bank Deposits</option>
+            <option value="Transfers to Mobile Numbers">Transfers</option>
+            <option value="Airtime Bill Payments">Airtime</option>
+            <option value="Payments to Code Holders">Payments</option>
+            <option value="Bank Transfers">Bank Transfers</option>
+            <option value="Transactions Initiated by Third Parties">Third Party</option>
+            <option value="Cash Power Bill Payments">Cash Power</option>
+            <option value="Withdrawals from Agents">Withdrawals</option>
+            <option value="Internet and Voice Bundle Purchases">Bundles</option>
+        </select>
+        <input type="number" id="min-amount" placeholder="Min Amount">
+        <input type="number" id="max-amount" placeholder="Max Amount">
+        <input type="date" id="date-filter">
+        <button id="filter-btn">Filter</button>
+    </div>
     <div id="sms-container"></div>
     <script src="./index.js"></script>
 </body>

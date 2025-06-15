@@ -20,8 +20,43 @@ nav {
 }
 
 nav p{
+    margin-right: 80px;
+}
+
+#search-container {
     margin-left: auto;
     margin-right: auto;
+    display: flex;
+    align-items: center;
+    width: 400px;
+}
+
+#search-input{
+    
+    height: 30px;
+    width: 240px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 13px;
+    padding-right: 13px;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+#search-btn {
+    height: 30px;
+    width: 100px;
+    margin-left: 20px;
+    border-radius: 7px;
+    border: none;
+    background-color: white;
+}
+
+#search-btn:hover {
+    cursor: pointer;
+    background-color: #d8d7b0;
 }
 
 .sms-card {
@@ -57,4 +92,21 @@ nav p{
 
 .hide-btn {
     margin-top: 10px;
+}
+
+#filters-container {
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 50px;
+
+}
+
+#type-filter {
+    
+}
+
+#filterBtn {
+
 }

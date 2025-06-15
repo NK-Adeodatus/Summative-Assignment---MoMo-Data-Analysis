@@ -81,10 +81,10 @@ def extract_sms():
             ''', (message, time))
         else:
             amount = re.search(r'\d{1,3}(?:,\d{3})*|\d+\s*RWF\s', message)
-            sender = re.search(r'RWF\sfrom\s[a-zA-Z]*\s[a-zA-Z]*', message)
-            sender = sender.group().replace('RWF from ', '').strip() if sender else None
             amount_match = re.search(r'(\d[\d,]*)\s*RWF', message)
             amount = int(amount_match.group(1).replace(',', '')) if amount_match else None
+            sender = re.search(r'RWF\sfrom\s[a-zA-Z]*\s[a-zA-Z]*', message)
+            sender = sender.group().replace('RWF from ', '').strip() if sender else None
             new_balance_match = re.search(r'(?i)new\s+balance\s*:\s*(\d[\d,]*)', message)
             new_balance = int(new_balance_match.group(1).replace(',', '')) if new_balance_match else None
             receiver = None
