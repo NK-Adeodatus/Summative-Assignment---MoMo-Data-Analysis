@@ -21,9 +21,9 @@ function renderMessages(messages) {
     const summaryContainer = document.getElementById('summary')
     container.innerHTML = ''
     if (messages.length === allMessages.length) {
-        summary.textContent = `Showing all ${allMessages.length} SMS messages — no filter applied`;;
+        summaryContainer.textContent = `Showing all ${allMessages.length} SMS messages — no filter applied`;;
     } else {
-        summary.textContent = `Showing ${messages.length} SMS messages matching your filters out of ${allMessages.length} total`;
+        summaryContainer.textContent = `Showing ${messages.length} SMS messages matching your filters out of ${allMessages.length} total`;
     }
         messages.forEach(sms => {
             const card = document.createElement('div')
@@ -60,6 +60,10 @@ function renderMessages(messages) {
 }
 
 function handleSearch() {
+    document.getElementById('type-filter').value = '';
+    document.getElementById('min-amount').value = '';
+    document.getElementById('max-amount').value = '';
+    document.getElementById('date-filter').value = '';
     // Add null check to prevent the error
     const searchInputElement = document.getElementById('search-input')
     
@@ -79,8 +83,8 @@ function handleSearch() {
     const filtered_sms = allMessages.filter(sms =>
         sms.message && sms.message.toLowerCase().includes(searchInput)
     )
-    
     renderMessages(filtered_sms)
+    searchInputElement.value = ''
 }
 
 function applyFilters() {
