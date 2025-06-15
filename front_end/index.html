@@ -13,10 +13,10 @@
             <input type="text" id="search-input" placeholder="Type an SMS...">
             <button id="search-btn">Search</button>
         </div>
-        <p>MoMo SMS Analyzer</p>
+        <p id="momo">MoMo SMS Analyzer</p>
     </nav>
     <div id="filters-container">
-        <select id="type-filter">
+        <select id="type-filter" class="filter-el">
             <option value="">All Types</option>
             <option value="Incoming Money">Incoming Money</option>
             <option value="Bank Deposits">Bank Deposits</option>
@@ -29,12 +29,19 @@
             <option value="Withdrawals from Agents">Withdrawals</option>
             <option value="Internet and Voice Bundle Purchases">Bundles</option>
         </select>
-        <input type="number" id="min-amount" placeholder="Min Amount">
-        <input type="number" id="max-amount" placeholder="Max Amount">
-        <input type="date" id="date-filter">
-        <button id="filter-btn">Filter</button>
+        <input type="number" id="min-amount" placeholder="Min Amount" class="filter-el">
+        <input type="number" id="max-amount" placeholder="Max Amount" class="filter-el">
+        <input type="date" id="date-filter" class="filter-el">
+        <button id="filter-btn" class="filter-el">Filter</button>
     </div>
+
     <div id="sms-container"></div>
+    <div id="pagination-controls">
+        <button id="prev-page">Previous</button>
+        <span id="page-numbers"></span>
+        <button id="next-page">Next</button>
+    </div>
+
     <script src="./index.js"></script>
 </body>
 </html>
