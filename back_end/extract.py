@@ -79,7 +79,6 @@ def extract_sms():
                 VALUES (?, ?)
             ''', (message, time))
         else:
-            #amount = re.search(r'\d{1,3}(?:,\d{3})*|\d+\s*RWF\s', message)
             amount_match = re.search(r'(\d[\d,]*)\s*RWF', message)
             amount = int(amount_match.group(1).replace(',', '')) if amount_match else None
             sender = re.search(r'RWF\sfrom\s[a-zA-Z]*\s[a-zA-Z]*', message)
