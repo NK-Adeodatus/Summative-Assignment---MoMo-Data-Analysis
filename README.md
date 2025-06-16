@@ -1,37 +1,42 @@
 # 📱 MoMo SMS Analyzer
 
-A fullstack web application for parsing, categorizing, and analyzing Mobile Money (MoMo) SMS messages. Users can search and filter transaction messages such as incoming money, withdrawals, bank deposits, and more.
+A fullstack web application for parsing, categorizing, and analyzing MTN Mobile Money (MoMo) SMS messages. The app extracts, classifies, and stores structured information from an XML file to the database. The frontend provides a simple and interactive interface for searching, filtering, and exploring messages.
 
 ---
 
 ## 🔍 Features
 
-- Extracts and parses SMS messages from an XML file.
-- Classifies SMS messages into categories (e.g., Incoming Money, Transfers, Airtime).
-- Stores processed and unprocessed messages into SQLite databases.
-- Provides a RESTful API to serve the SMS data.
-- Offers a user-friendly frontend to visualize, search, and filter messages.
+- Extracts and parses SMS messages from an XML file (`modified_sms_v2.xml`)
+- Classifies messages into transaction categories (e.g., Incoming Money, Transfers, Airtime)
+- Saves both categorized and uncategorized messages into SQLite databases
+- Provides a RESTful API to serve SMS data in JSON format
+- Includes a dynamic frontend UI to:
+  - Display SMS summaries
+  - Filter by type, amount, and date
+  - Search message content
+  - Expand and collapse full SMS text
 
 ---
 
 ## 🗂️ Project Structure
+
 ```text
 MoMo-SMS-Analyzer/
 │
 ├── backend/
-│ ├── app.py # ✅ Entry point – runs extraction & launches Flask API
-│ ├── api.py # Flask app serving JSON API and static HTML
-│ ├── extract.py # Parses XML and stores categorized SMS in database
-│ ├── MoMo_SMS.db # Processed SMS database (auto-generated)
-│ └── modified_sms_v2.xml # Input file containing SMS messages
+│   ├── app.py                  # Entry point – runs SMS extraction and launches Flask Server.
+│   ├── api.py                  # Serves the data from database as JSON and frontend.
+│   ├── extract.py              # Parses XML and stores categorized SMS in database.
+│   ├── MoMo_SMS.db             # Stores structured data extracted from the XML file.
+│   └── modified_sms_v2.xml     # XML file containing the SMS messages.
 │
 ├── front_end/
-│ ├── index.html # Frontend UI with filters and display
-│ ├── style.css # App styling
-│ └── script.js # Fetches, displays, and filters messages
+│   ├── index.html              # Frontend UI.
+│   ├── style.css               # Styling for the app.
+│   └── index.js                # Fetches, displays, and filters SMS messages.
 │
-├── Unprocessed_SMS.db # Unrecognized messages database (auto-generated)
-└── README.md
+├── Unprocessed_SMS.db          # Stores uncategorized messages from the XML file.
+└── README.md                   # Project documentation
 ```
 
 
@@ -40,7 +45,7 @@ MoMo-SMS-Analyzer/
 ## ⚙️ Technologies Used
 
 - **Frontend**: HTML, CSS, JavaScript (Vanilla)
-- **Backend**: Python, Flask, SQLite3, ElementTree (for XML)
+- **Backend**: Python, Flask, SQLite3
 - **Architecture**: REST API
 
 ---
@@ -54,7 +59,7 @@ git clone https://github.com/NK-Adeodatus/Summative-Assignment---MoMo-Data-Analy
 cd MoMo-SMS-Analyzer/backend
 ```
 ### 2. Install Dependencies
-Make sure Flask is installed.
+Make sure Python is installed then install Flask.
 ```bash
 pip install flask
 ```
@@ -78,25 +83,28 @@ http://127.0.0.1:5000/
 ## 🔧 How It Works
 ### SMS Extraction (extract.py)
 
-- Parses modified_sms_v2.xml and categorizes messages.
-- Stores structured data in MoMo_SMS.db.
-- Uncategorized messages are saved to Unprocessed_SMS.db at the root directory(Summative_MoMo_data_analysis/).
+- Parses modified_sms_v2.xml to extract message details
+- Classifies each SMS based on patterns (e.g., "You have received")
+- Saves recognized(categorized) messages in MoMo_SMS.db
+- Unrecognized(uncategorized) messages go to Unprocessed_SMS.db in the root directory(Summative_MoMo_data_analysis/)
 
 ### Flask API (api.py)
 
 - Serves static frontend files (index.html).
 - API Endpoint /api/sms returns all processed SMS as JSON.
 
-### Frontend (front_end/)
+### 💻 Frontend (index.html, index.js, style.css)
 
 - Fetches messages from the API.
-- Allows search and filter by:
-    - Type of SMS
+- Displays all SMS messages in styled cards
+- Allows filtering by:
+    - Type (Incoming Money, Airtime, etc.)
     - Amount range
     - Date
-- Messages are displayed with collapsible full content.
+- Supports search by message's text content
+- SMS cards are expandable to view the full original message
 
 ## 📂 Databases
 
-- MoMo_SMS.db: Stores SMS with extracted fields like amount, sender, receiver, etc.
+- MoMo_SMS.db: Stores Categorized SMS with extracted fields like type_of_sms, amount, sender, receiver, etc.
 - Unprocessed_SMS.db: Stores messages that couldn’t be categorized.
