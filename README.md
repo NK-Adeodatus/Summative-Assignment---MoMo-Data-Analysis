@@ -36,10 +36,11 @@ MoMo-SMS-Analyzer/
 │
 ├── front_end/
 │   ├── index.html              # Frontend UI.
-│   ├── style.css               # Styling for the app.
+│   ├── index.css               # Styling for the web app.
 │   └── index.js                # Fetches, displays, and filters SMS messages.
 │
 ├── Unprocessed_SMS.db          # Stores uncategorized messages from the XML file.
+├── AUTHORS                     # The project's authors
 └── README.md                   # Project documentation
 ```
 
