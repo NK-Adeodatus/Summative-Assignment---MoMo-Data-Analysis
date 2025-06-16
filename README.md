@@ -4,6 +4,10 @@ A fullstack web application for parsing, categorizing, and analyzing MTN Mobile 
 
 ---
 
+## 🎥 Demo Video
+
+📺 [Click here to watch the demo video](https://drive.google.com/file/d/1KuVDoGY9mzj8HxNOxjrpeC9-MWkzHLYa/view?usp=sharing)
+
 ## 🔍 Features
 
 - Extracts and parses SMS messages from an XML file (`modified_sms_v2.xml`)
