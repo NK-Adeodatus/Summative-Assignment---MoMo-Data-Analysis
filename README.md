@@ -78,25 +78,25 @@ http://127.0.0.1:5000/
 ## 🔧 How It Works
 ### SMS Extraction (extract.py)
 
--Parses modified_sms_v2.xml and categorizes messages.
--Stores structured data in MoMo_SMS.db.
--Uncategorized messages are saved to Unprocessed_SMS.db at the root directory(Summative_MoMo_data_analysis/).
+- Parses modified_sms_v2.xml and categorizes messages.
+- Stores structured data in MoMo_SMS.db.
+- Uncategorized messages are saved to Unprocessed_SMS.db at the root directory(Summative_MoMo_data_analysis/).
 
 ### Flask API (api.py)
 
--Serves static frontend files (index.html).
--API Endpoint /api/sms returns all processed SMS as JSON.
+- Serves static frontend files (index.html).
+- API Endpoint /api/sms returns all processed SMS as JSON.
 
 ### Frontend (front_end/)
 
--Fetches messages from the API.
--Allows search and filter by:
-    -Type of SMS
-    -Amount range
-    -Date
--Messages are displayed with collapsible full content.
+- Fetches messages from the API.
+- Allows search and filter by:
+    - Type of SMS
+    - Amount range
+    - Date
+- Messages are displayed with collapsible full content.
 
 ## 📂 Databases
 
--MoMo_SMS.db: Stores SMS with extracted fields like amount, sender, receiver, etc.
--Unprocessed_SMS.db: Stores messages that couldn’t be categorized.
+- MoMo_SMS.db: Stores SMS with extracted fields like amount, sender, receiver, etc.
+- Unprocessed_SMS.db: Stores messages that couldn’t be categorized.
