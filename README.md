@@ -1,6 +1,6 @@
 # 📱 MoMo SMS Analyzer
 
-A fullstack web application for parsing, categorizing, and analyzing MTN Mobile Money (MoMo) SMS messages. The app extracts, classifies, and stores structured information from an XML file to the database. The frontend provides a simple and interactive interface for searching, filtering, and exploring messages.
+A fullstack web application for parsing, categorizing, and analyzing MTN Mobile Money (MoMo) SMS messages. The app extracts, classifies, and stores structured information from an XML file to the database. The frontend provides a simple and interactive interface for searching, filtering, and exploring messagess, and is connected to the backend via a RESTful API.
 
 ---
 
