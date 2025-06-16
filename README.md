@@ -106,7 +106,7 @@ When the app starts, it checks if a database exists and if it has content.
         - Create the database if it has not been created and store the structured data.
 - Once the database is ready, app.py then runs the app.py which serves the extracted data from the database and the index.html in the frontend.
 
-### 💻 Frontend (index.html, index.js, style.css)
+### 💻 Frontend (index.html, index.js, index.css)
 
 - Fetches messages from the API.
 - Displays all SMS messages in styled cards
