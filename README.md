@@ -46,7 +46,6 @@ MoMo-SMS-Analyzer/
 
 - **Frontend**: HTML, CSS, JavaScript (Vanilla)
 - **Backend**: Python, Flask, SQLite3
-- **Architecture**: REST API
 
 ---
 
