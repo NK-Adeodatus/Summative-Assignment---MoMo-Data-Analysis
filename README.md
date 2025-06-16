@@ -64,10 +64,10 @@ Make sure modified_sms_v2.xml is in the backend directory.
 python app.py
 ```
 
--This will:
-    -Parse and categorize the SMS XML file
-    -Store the data in MoMo_SMS.db
-    -Launch the Flask development server
+- This will:
+    - Parse and categorize the SMS XML file
+    - Store the data in MoMo_SMS.db
+    - Launch the Flask development server
 
 ### 4. View the Frontend
 Once the backend is running, open your browser and navigate to:
