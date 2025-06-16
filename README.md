@@ -93,6 +93,16 @@ http://127.0.0.1:5000/
 - Serves static frontend files (index.html).
 - API Endpoint /api/sms returns all processed SMS as JSON.
 
+### Entry point (app.py)
+
+When the app starts, it checks if a database exists and if it has content.
+- If the database is missing or has no content:
+    - It calls extract.py to:
+        - Parse the XML file.
+        - Extract and classify the SMS messages.
+        - Create the database if it has not been created and store the structured data.
+- Once the database is ready, app.py then runs the app.py which serves the extracted data and the frontend.
+
 ### 💻 Frontend (index.html, index.js, style.css)
 
 - Fetches messages from the API.
