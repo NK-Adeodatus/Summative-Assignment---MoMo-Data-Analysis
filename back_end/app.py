@@ -10,11 +10,9 @@ DB_PATH = os.path.join(SCRIPT_DIR, 'MoMo_SMS.db')
 def check_extraction():
     print('check run')
     if not os.path.exists(DB_PATH):
-        print('check run in if')
         extract_sms()
         return
     try:
-        print('check run in try')
         conn = sqlite3.connect(DB_PATH)
         cursor = conn.cursor()
         cursor.execute('SELECT COUNT(*) FROM sms')
