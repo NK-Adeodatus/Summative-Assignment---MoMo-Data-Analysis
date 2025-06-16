@@ -1,6 +1,5 @@
 from flask import Flask, jsonify, make_response, send_from_directory
 import sqlite3
-from extract import extract_sms
 import os
 
 
@@ -35,6 +34,7 @@ def get_all_sms():
     ]
     return sms_list
 
+# Serve the HTML page from the front_end directory.
 @app.route('/')
 def serve_page():
     return send_from_directory(app.static_folder, 'index.html')
@@ -45,8 +45,8 @@ def api_sms():
     response = make_response(jsonify(get_all_sms()))
     response.headers['Access-Control-Allow-Origin'] = '*' 
     return response
-    # return jsonify(get_all_sms())
 
+# Start the Flask server.
 def run_app():
     app.run(debug=True)
 

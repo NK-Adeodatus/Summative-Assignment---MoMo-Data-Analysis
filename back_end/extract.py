@@ -3,6 +3,7 @@ import sqlite3
 import re
 import os
 
+# Categorize the SMS based on the message content patterns to determine the SMS type.
 def determine_type_of_sms(message):
     if re.search(r'You have received', message):
         return 'Incoming Money'
@@ -27,19 +28,18 @@ def determine_type_of_sms(message):
     else:
         return 'Uncategorized'
 
+# Parse the XML SMS data and extract relevant information into the database.
 def extract_sms():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     xml_file = os.path.join(script_dir, 'modified_sms_v2.xml')
     db_file = os.path.join(script_dir, 'MoMo_SMS.db')
     unprocessed_db = os.path.join(script_dir, '../Unprocessed_SMS.db')
 
-    # Parse the XML file
     tree = ET.parse(xml_file)
     if tree:
         print('tree is available')
     root = tree.getroot()
 
-    # Connect to the SQLite database (or create it if it doesn't exist)
     conn = sqlite3.connect(db_file)
     conn_unprocessed = sqlite3.connect(unprocessed_db)
     cursor = conn.cursor()
@@ -66,7 +66,6 @@ def extract_sms():
         )
     ''')
 
-    # Insert data into the database
     for sms in root.findall('sms'):
         message = sms.get('body')
         if message == None:
@@ -80,7 +79,7 @@ def extract_sms():
                 VALUES (?, ?)
             ''', (message, time))
         else:
-            amount = re.search(r'\d{1,3}(?:,\d{3})*|\d+\s*RWF\s', message)
+            #amount = re.search(r'\d{1,3}(?:,\d{3})*|\d+\s*RWF\s', message)
             amount_match = re.search(r'(\d[\d,]*)\s*RWF', message)
             amount = int(amount_match.group(1).replace(',', '')) if amount_match else None
             sender = re.search(r'RWF\sfrom\s[a-zA-Z]*\s[a-zA-Z]*', message)
